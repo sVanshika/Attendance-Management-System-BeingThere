@@ -1,4 +1,25 @@
+<?php 
+
+session_start();
+$emailUser = $_SESSION['userLoggedIn'];
+$organisationId=$_SESSION['organisationId'];
+echo $emailUser;
+echo "<br>";
+echo $organisationId;
+
+?>
 <?php include("../includes/handlers/config.php"); ?>
+<?php 
+
+$query=mysqli_query($con,"SELECT * FROM employee_details WHERE email='$emailUser' AND organisation='$organisationId'");
+$query_name=mysqli_query($con,"SELECT organisation FROM organisations WHERE id='$organisationId'");
+$array=mysqli_fetch_array($query);
+$eid=$array['eid'];
+$array_name=mysqli_fetch_array($query_name);
+$organisation_name=$array_name['organisation'];
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,46 +138,55 @@
 
     <!-- NavBar ends-->
 
-<div class="col-lg-10">
+    <div class="col-lg-10">
 <div id="mainContainer" style="margin:auto 250px; width:50%;">
-
-
 
 <!-- Profile of the comes here -->
     <h4 class="text-center display-4" style="margin-top:10px;">Profile</h4>
+    <form action="" method="POST">
             
     <div class="profile_div">
         <div class="div_row">
+            <div class="field_name"> <h4>Organisation</h4></div>
+            <div class="field_value"> <h4><?php echo $organisation_name; ?></h4></div>
+        </div> 
+        <div class="div_row">
             <div class="field_name"> <h4>ID</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['eid']; ?></h4></div>
         </div> 
         <div class="div_row">
             <div class="field_name"> <h4>Name</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['name']; ?></h4></div>
         </div> 
         <div class="div_row">
             <div class="field_name"> <h4>Gender</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['gender']; ?></h4></div>
         </div> 
         <div class="div_row">
             <div class="field_name"> <h4>Email</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['email']; ?></h4></div>
         </div> 
-        <div class="div_row">
-            <div class="field_name"> <h4>Department</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
-        </div> 
+
         <div class="div_row">
             <div class="field_name"> <h4>DOB</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['DOB']; ?></h4></div>
         </div>  
         <div class="div_row">
             <div class="field_name"> <h4>Contact Number</h4></div>
-            <div class="field_value"> <h4>1234</h4></div>
+            <div class="field_value"> <h4><?php echo $array['contact_no']; ?></h4></div>
         </div> 
-        
+        <div class="div_row">
+            <div class="field_name"> <h4>Department</h4></div>
+            <div class="field_value"> <h4><?php echo $array['department']; ?></h4></div>
+        </div> 
+        <div class="div_row">
+            <div class="field_name"> <h4>Password</h4></div>
+            <div class="field_value"> <h4><input type="password" name="password" value=<?php echo $array['password']; ?> name=""></h4></div>
+        </div> 
 
     </div>
+    <button class="btn btn-primary btn-lg" name="update" style="margin-top:28px;margin-left: 276px;">Update</button>
+    </form>
 </div>
 
 
@@ -166,3 +196,19 @@
 
 
 <?php include("../footer.php"); ?>
+
+<?php
+
+if(isset($_POST['update'])){
+    $password=$_POST['password'];
+    $update=mysqli_query($con,"UPDATE employee_details SET password='$password' WHERE email='$emailUser' AND organisation='$organisationId'");
+    if($update){
+        echo "<script>alert('Password Changed Successfully');</script>";
+    }
+    else{
+        echo "<script>alert('Something went Wrong');</script>";
+    }
+}
+
+
+?>
