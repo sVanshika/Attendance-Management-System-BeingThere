@@ -207,7 +207,7 @@ include("includes/handlers/login-handler.php");
             </div>
             <div class="col-sm-4 col-xs-12 pl-5">
                 <h3>Quick Links</h3>
-                <a href="index">Home</a><br>
+                <a href="#home-section">Home</a><br>
                 <a href="#about">About Us</a><br>
                 <a href="#features">Features</a><br>
                 <a href="register.php">Register</a><br>
