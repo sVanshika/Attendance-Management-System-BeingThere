@@ -33,7 +33,7 @@ include("includes/handlers/login-handler.php");
         <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
             <ul class="navbar-nav ml-auto mr-5">
                 <li class="nav-item active px-2">
-                    <a class="nav-link" href="index.php" style="color:black;">
+                    <a class="nav-link" href="#home-section" style="color:black;">
                     Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item px-2">
@@ -41,6 +41,9 @@ include("includes/handlers/login-handler.php");
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link" href="#features" style="color:black;">Features</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="#footer" style="color:black;">Contact us</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link" id="login" href="#loginmodal" data-toggle="modal">Log in</a>
